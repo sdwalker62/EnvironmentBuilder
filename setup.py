@@ -70,6 +70,7 @@ print_header('Installing zsh', 1)
 print('Gathering prerequisites ...')
 cmd = 'apt-cache policy curl'
 res = run_cmd(cmd)
+print(res)
 test_for_existence = res.split('Installed:')[1][2:6] == 'none'
 
 if not test_for_existence:
