@@ -113,6 +113,7 @@ print_header('Installing fonts', 1, 'blue')
 check_and_install_pkg('wget')
 run('mkdir firacode_nf')
 run('mkdir firamono_nf')
+print(home)
 run('mkdir ' + home + '/.local/share/fonts')
 
 # Install FiraCode NerdFont
