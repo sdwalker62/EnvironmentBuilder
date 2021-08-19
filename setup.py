@@ -25,8 +25,7 @@ try:
   run(cmd, shell=True, check=True)
 except CalledProcessError:
   cmd = 'apt-get -y install python3-pip'
-  res = run_cmd(cmd)
-  print(res)
+  _ = run_cmd(cmd)
   import pip
 
 def pip_install(package):
@@ -39,9 +38,9 @@ except ImportError:
     from termcolor import colored
 
 
-def print_header(msg, index):
+def print_header(msg, index, color):
   print('\n')
-  print(colored(str(index) + '. ' + msg, 'blue', attrs=['bold']))
+  print(colored(str(index) + '. ' + msg, color, attrs=['bold']))
   print('\n')
 
 # -- Introduction -- #
@@ -87,19 +86,86 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 #github_email = input()
 
 
+def check_for_prereq(prereq):
+  print('checking for prerequisites \'' + prereq + '\'')
+  res = run_cmd('apt-cache policy ' + prereq)
+  parse_res = yaml.safe_load(res)
+  if parse_res[prereq]['Installed'] == '(none)':
+    print(prereq + ' is not installed!')
+    return False
+  else:
+    return True
 
+
+def check_and_install_pkg(pkg):
+  pkg_exists = check_for_prereq(pkg)
+  if not pkg_exists:
+    print('Installing ' + pkg)
+    _ = run_cmd('apt-get install ' + pkg)
+
+
+# -- Install fonts -- #
+print_header('Installing fonts', 1, 'blue')
+_ = run_cmd('mkdir firacode_nf')
+_ = run_cmd('mkdir firamono_nf')
+_ = run_cmd('mkdir firacode')
+
+# Install FiraCode
+#_ = run_cmd('cd firacode')
+#url = """
+#https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
+#"""
+#cmd = 'curl ' + url
+#_ = run_cmd(cmd)
+#_ = run_cmd('unzip Fira_Code_v5.2')
+
+# Install FiraCode NerdFont
+_ = run_cmd('cd ../firacode_nf')
+url = """
+https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+"""
+cmd = 'curl ' + url
+_ = run_cmd(cmd)
+_ = run_cmd('unzip FiraCode.zip')
+_ = run_cmd('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Code\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+
+
+# Install FiraMono NerdFont
+_ = run_cmd('cd ../firamono_nf')
+url = """
+https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip
+"""
+cmd = 'curl ' + url
+_ = run_cmd(cmd)
+_ = run_cmd('unzip FiraMono.zip')
+_ = run_cmd('cp Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Mono\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+_ = run_cmd('cp Fira\ Mono\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+
+_ = run_cmd('cd ..')
 
 
 # -- Install zsh -- #
-print_header('Installing zsh', 1)
-
-print('Gathering prerequisites ...')
-package = 'curl'
-cmd = 'apt-cache policy ' + package
-res = run_cmd(cmd)
-parse_res = yaml.safe_load(res)
-if parse_res[package]['Installed'] == '(none)':
-  print('curl is not installed!')
+print_header('Installing oh-my-zsh', 1, 'blue')
+check_and_install_pkg('zsh')
 
 
+# -- Install oh-my-zsh -- #
+print_header('Installing oh-my-zsh', 1, 'blue')
+check_and_install_pkg('curl')
+install_cmd = """
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+"""
+_ = run_cmd(install_cmd)
 
+
+# -- Install powerlevel10k -- #
+print_header('Installing oh-my-zsh', 1, 'blue')
+install_cmd = """
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+"""
+_ = run_cmd(install_cmd)
