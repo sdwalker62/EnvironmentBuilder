@@ -58,8 +58,8 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
-cmd = ['apt', 'list', '--installed', '|', 'grep', 'curl']
-shell_out = subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
+cmd = 'apt list --installed | grep curl'
+shell_out = subprocess.run(cmd, stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
 print(shell_out)
 
 
