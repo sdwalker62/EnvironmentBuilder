@@ -55,7 +55,7 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 
 
 # -- Install zsh -- #
-print_header('Installing zsh', 1, 'green')
+print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
 cmd = ['apt list', '--installed']
