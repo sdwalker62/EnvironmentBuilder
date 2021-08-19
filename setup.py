@@ -5,10 +5,11 @@ version = 1.0
 import os
 import subprocess 
 import sys
-from subprocess import CalledProcessError, run, PIPE
+from subprocess import CalledProcessError, PIPE
+import functools
 
 def run_cmd(cmd):
-  return run(
+  return subprocess.run(
     cmd, 
     shell=True, 
     stdout=PIPE, 
@@ -20,7 +21,7 @@ def run_cmd(cmd):
  # check if pip is installed
 try: 
   cmd = 'which pip'
-  run(cmd, shell=True, check=True)
+  subprocess.run(cmd, shell=True, check=True)
 except CalledProcessError:
   cmd = 'apt-get -y install python3-pip'
   _ = run_cmd(cmd)
@@ -83,6 +84,8 @@ print(intro_text)
 print('Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:')
 #github_email = input()
 
+run = functools.partial(subprocess.run, shell=True)
+
 
 def check_for_prereq(prereq):
   print('checking for prerequisites \'' + prereq + '\'')
@@ -116,7 +119,7 @@ except CalledProcessError:
 _ = run_cmd('cd firacode_nf')
 url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip"
 cmd = 'wget ' + url
-run(cmd, shell=True)
+run(cmd)
 _ = run_cmd('unzip FiraCode.zip')
 _ = run_cmd('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 _ = run_cmd('cp Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
