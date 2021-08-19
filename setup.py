@@ -106,7 +106,7 @@ def check_and_install_pkg(pkg):
 
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'blue')
-check_and_install_pkg('curl')
+check_and_install_pkg('wget')
 
 try:
   _ = run_cmd('mkdir firacode_nf')
@@ -120,7 +120,7 @@ _ = run_cmd('cd firacode_nf')
 url = """
 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 """
-cmd = 'curl ' + url
+cmd = 'wget ' + url
 _ = run_cmd(cmd)
 _ = run_cmd('unzip FiraCode.zip')
 _ = run_cmd('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
@@ -135,7 +135,7 @@ _ = run_cmd('cd ../firamono_nf')
 url = """
 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip
 """
-cmd = 'curl ' + url
+cmd = 'wget ' + url
 _ = run_cmd(cmd)
 _ = run_cmd('unzip FiraMono.zip')
 _ = run_cmd('cp Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
@@ -152,6 +152,7 @@ check_and_install_pkg('zsh')
 
 # -- Install oh-my-zsh -- #
 print_header('Installing oh-my-zsh', 3, 'blue')
+check_and_install_pkg('curl')
 install_cmd = """
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 """
