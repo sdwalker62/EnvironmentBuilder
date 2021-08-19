@@ -5,10 +5,20 @@ from subprocess import run, PIPE
 
 version = 1.0
 
+
 def print_header(msg, index):
   print('\n')
   print(str(index) + '. ' + msg)
   print ('\n')
+
+
+def run_cmd(cmd):
+  return run(
+    cmd, 
+    shell=True, 
+    stdout=PIPE, 
+    stderr=PIPE, 
+    check=True).stdout.decode('utf-8')
 
 
 # -- Introduction -- #
@@ -59,7 +69,10 @@ print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
 cmd = 'apt-cache policy curl'
-res = run(cmd, shell=True, stdout=PIPE, stderr=PIPE, check=True)
-print(res.returncode, res.stdout, res.stderr)
+res = run_cmd(cmd)
+test_for_existence = res.split('Installed:')[1][2:6] == 'none'
+
+if not test_for_existence:
+  print('curl is not installed!')
 
 
