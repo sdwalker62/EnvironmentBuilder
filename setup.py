@@ -2,6 +2,7 @@
 import os 
 import sys
 from subprocess import run, PIPE
+import yaml
 
 version = 1.0
 
@@ -70,7 +71,8 @@ print_header('Installing zsh', 1)
 print('Gathering prerequisites ...')
 cmd = 'apt-cache policy curl'
 res = run_cmd(cmd)
-print(res)
+parse_res = yaml.safe_load(res)
+print(parse_res['Installed'])
 test_for_existence = res.split('Installed:')[1][2:6] == 'none'
 
 if not test_for_existence:
