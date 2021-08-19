@@ -69,13 +69,12 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
-cmd = 'apt-cache policy curl'
+package = 'curl'
+cmd = 'apt-cache policy' + package
 res = run_cmd(cmd)
 parse_res = yaml.safe_load(res)
-print(parse_res['Installed'])
-test_for_existence = res.split('Installed:')[1][2:6] == 'none'
-
-if not test_for_existence:
+if parse_res[package]['Installed'] == '(none)':
   print('curl is not installed!')
+
 
 
