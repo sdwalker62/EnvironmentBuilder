@@ -21,7 +21,7 @@ def run_cmd(cmd):
 # -- pip install things -- #
  # check if pip is installed
 cmd = 'which pip'
-res = run(cmd, check=True)
+res = run(cmd, shell=True, check=True)
 if res.returncode != 0:
   print('hey')
   cmd = 'apt-get install python3-pip'
