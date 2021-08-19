@@ -24,7 +24,7 @@ try:
   cmd = 'which pip'
   run(cmd, shell=True, check=True)
 except CalledProcessError:
-  cmd = 'apt-get install python3-pip'
+  cmd = 'apt-get -y install python3-pip'
   res = run_cmd(cmd)
   print(res)
   import pip
