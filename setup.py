@@ -23,6 +23,7 @@ def run_cmd(cmd):
 cmd = 'which pip'
 res = run(cmd, check=True)
 if res.returncode != 0:
+  print('hey')
   cmd = 'apt-get install python3-pip'
   res = run_cmd(cmd)
   import pip
