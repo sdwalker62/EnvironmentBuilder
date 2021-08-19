@@ -11,7 +11,7 @@ import yaml
 
 # -- pip install things -- #
 def pip_install(package):
-    cmd = 'pip install ' + package
+    cmd = 'pip3 install ' + package
     subprocess.run(cmd, shell=True)
 
 try: 
