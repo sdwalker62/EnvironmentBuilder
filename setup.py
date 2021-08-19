@@ -70,7 +70,7 @@ print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
 package = 'curl'
-cmd = 'apt-cache policy' + package
+cmd = 'apt-cache policy ' + package
 res = run_cmd(cmd)
 parse_res = yaml.safe_load(res)
 if parse_res[package]['Installed'] == '(none)':
