@@ -112,6 +112,7 @@ try:
   _ = run_cmd('mkdir firacode_nf')
   _ = run_cmd('mkdir firamono_nf')
   _ = run_cmd('mkdir firacode')
+  run('mkdir ~/.local/share/fonts')
 except CalledProcessError:
   pass
 
