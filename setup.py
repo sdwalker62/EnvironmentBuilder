@@ -45,11 +45,11 @@ def print_header(msg, index, color):
 
 # -- Introduction -- #
 title = """
-  ___      _   _               ___      _               ___         _      _   
- | _ \_  _| |_| |_  ___ _ _   / __| ___| |_ _  _ _ __  / __| __ _ _(_)_ __| |_ 
- |  _/ || |  _| ' \/ _ \ ' \  \__ \/ -_)  _| || | '_ \ \__ \/ _| '_| | '_ \  _|
- |_|  \_, |\__|_||_\___/_||_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|
-      |__/                                      |_|                  |_|             
+  _   _ _             _          ___      _               ___         _      _   
+ | | | | |__ _  _ _ _| |_ _  _  / __| ___| |_ _  _ _ __  / __| __ _ _(_)_ __| |_ 
+ | |_| | '_ \ || | ' \  _| || | \__ \/ -_)  _| || | '_ \ \__ \/ _| '_| | '_ \  _|
+  \___/|_.__/\_,_|_||_\__|\_,_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|
+                                                  |_|                  |_|                                        |_|                  |_|             
 """
 
 intro_text = """
@@ -110,15 +110,6 @@ _ = run_cmd('mkdir firacode_nf')
 _ = run_cmd('mkdir firamono_nf')
 _ = run_cmd('mkdir firacode')
 
-# Install FiraCode
-#_ = run_cmd('cd firacode')
-#url = """
-#https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
-#"""
-#cmd = 'curl ' + url
-#_ = run_cmd(cmd)
-#_ = run_cmd('unzip Fira_Code_v5.2')
-
 # Install FiraCode NerdFont
 _ = run_cmd('cd ../firacode_nf')
 url = """
@@ -150,12 +141,12 @@ _ = run_cmd('cd ..')
 
 
 # -- Install zsh -- #
-print_header('Installing oh-my-zsh', 1, 'blue')
+print_header('Installing zsh', 2, 'blue')
 check_and_install_pkg('zsh')
 
 
 # -- Install oh-my-zsh -- #
-print_header('Installing oh-my-zsh', 1, 'blue')
+print_header('Installing oh-my-zsh', 3, 'blue')
 check_and_install_pkg('curl')
 install_cmd = """
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -164,7 +155,7 @@ _ = run_cmd(install_cmd)
 
 
 # -- Install powerlevel10k -- #
-print_header('Installing oh-my-zsh', 1, 'blue')
+print_header('Installing powerlevel10k', 4, 'blue')
 install_cmd = """
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 """
