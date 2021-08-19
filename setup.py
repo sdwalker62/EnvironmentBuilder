@@ -107,14 +107,10 @@ def check_and_install_pkg(pkg):
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'blue')
 check_and_install_pkg('wget')
-print('PASS')
-try:
-  _ = run_cmd('mkdir firacode_nf')
-  _ = run_cmd('mkdir firamono_nf')
-  _ = run_cmd('mkdir firacode')
-  run('mkdir ~/.local/share/fonts')
-except CalledProcessError:
-  pass
+run('mkdir firacode_nf')
+run('mkdir firamono_nf')
+run('mkdir firacode')
+run('mkdir ~/.local/share/fonts')
 
 # Install FiraCode NerdFont
 run('cd firacode_nf')
