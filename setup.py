@@ -110,7 +110,7 @@ check_and_install_pkg('wget')
 run('mkdir firacode_nf')
 run('mkdir firamono_nf')
 run('mkdir firacode')
-run('mkdir ~/.local/share/fonts')
+run('mkdir ~/.local/share/fonts/')
 
 # Install FiraCode NerdFont
 run('cd firacode_nf')
