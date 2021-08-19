@@ -7,10 +7,9 @@ import subprocess
 import sys
 from subprocess import CalledProcessError, PIPE
 import functools
-from pathlib import Path
 
-home = str(Path.home())
-
+user = os.environ['userdomain']
+print(user)
 
 def run_cmd(cmd):
   return subprocess.run(
