@@ -104,7 +104,7 @@ def check_and_install_pkg(pkg):
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'blue')
 check_and_install_pkg('wget')
-
+print('PASS')
 try:
   _ = run_cmd('mkdir firacode_nf')
   _ = run_cmd('mkdir firamono_nf')
