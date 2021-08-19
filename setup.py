@@ -126,22 +126,22 @@ run('cp Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 
 
 # Install FiraMono NerdFont
-_ = run_cmd('cd ../firamono_nf')
+run('cd ../firamono_nf')
 url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip"
 cmd = 'wget ' + url
 run(cmd, shell=True)
-_ = run_cmd('unzip FiraMono.zip')
-_ = run_cmd('cp Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Mono\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Mono\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('unzip FiraMono.zip')
+run('cp Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Mono\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Mono\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 
-_ = run_cmd('cd ..')
+run('cd ..')
 
 
 # -- Install zsh -- #
 print_header('Installing zsh', 2, 'blue')
 check_and_install_pkg('zsh')
-
+run('cp .zshrc ~')
 
 # -- Install oh-my-zsh -- #
 print_header('Installing oh-my-zsh', 3, 'blue')
@@ -149,7 +149,7 @@ check_and_install_pkg('curl')
 install_cmd = """
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 """
-_ = run_cmd(install_cmd)
+run(install_cmd)
 
 
 # -- Install powerlevel10k -- #
@@ -157,4 +157,5 @@ print_header('Installing powerlevel10k', 4, 'blue')
 install_cmd = """
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 """
-_ = run_cmd(install_cmd)
+run(install_cmd)
+run('cp .p10k.zsh ~')
