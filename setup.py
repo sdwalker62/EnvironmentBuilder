@@ -6,8 +6,6 @@ import os
 import subprocess 
 import sys
 from subprocess import CalledProcessError, run, PIPE
-import yaml
-
 
 def run_cmd(cmd):
   return run(
@@ -89,8 +87,7 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 def check_for_prereq(prereq):
   print('checking for prerequisites \'' + prereq + '\'')
   res = run_cmd('apt-cache policy ' + prereq)
-  parse_res = yaml.safe_load(res)
-  if parse_res[prereq]['Installed'] == '(none)':
+  if res.split('Installed:')[1][2:6] == 'none':
     print(prereq + ' is not installed!')
     return False
   else:
@@ -107,7 +104,7 @@ def check_and_install_pkg(pkg):
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'blue')
 check_and_install_pkg('wget')
-print('hey')
+
 try:
   _ = run_cmd('mkdir firacode_nf')
   _ = run_cmd('mkdir firamono_nf')
