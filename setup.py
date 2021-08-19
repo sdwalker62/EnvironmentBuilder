@@ -2,8 +2,8 @@ version = 1.0
 
 
 # -- Imports -- #
-import pip
-import os 
+import os
+import subprocess 
 import sys
 from subprocess import run, PIPE
 import yaml
@@ -11,7 +11,8 @@ import yaml
 
 # -- pip install things -- #
 def pip_install(package):
-    pip.main(['install', package])
+    cmd = 'pip install ' + package
+    subprocess.run(cmd, shell=True)
 
 try: 
   from termcolor import colored
