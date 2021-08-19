@@ -5,7 +5,7 @@ version = 1.0
 import os
 import subprocess 
 import sys
-from subprocess import run, PIPE
+from subprocess import CalledProcessError, run, PIPE
 import yaml
 
 
@@ -20,9 +20,10 @@ def run_cmd(cmd):
 
 # -- pip install things -- #
  # check if pip is installed
-cmd = 'which pip'
-res = run(cmd, shell=True, check=True)
-if res.returncode != 0:
+try: 
+  cmd = 'which pip'
+  run(cmd, shell=True, check=True)
+except CalledProcessError:
   print('hey')
   cmd = 'apt-get install python3-pip'
   res = run_cmd(cmd)
