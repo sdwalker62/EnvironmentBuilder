@@ -1,5 +1,7 @@
 # -- Imports -- #
 from termcolor import colored
+import os 
+import sys
 
 version = 1.0
 
@@ -33,5 +35,12 @@ After that information is provided it will proceed without user input.
 print(colored(title, 'green'))
 print(colored('version: ' + str(version), 'blue', attrs=['bold']))
 print(intro_text)
+
+
+# -- Check for root privileges -- # 
+if os.geteuid() != 0: 
+  print(colored('This script requires root privileges to operate properly.', 'red', attrs=['bold'])) 
+  sys.exit()
+
 
 # -- Gather necessary user information for Github ssh keys -- #
