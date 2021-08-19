@@ -8,8 +8,6 @@ import sys
 from subprocess import CalledProcessError, PIPE
 import functools
 
-user = os.environ['userdomain']
-print(user)
 
 def run_cmd(cmd):
   return subprocess.run(
@@ -109,6 +107,8 @@ def check_and_install_pkg(pkg):
 
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'blue')
+user = run_cmd('$USER')
+home = '/home/' + user
 check_and_install_pkg('wget')
 run('mkdir firacode_nf')
 run('mkdir firamono_nf')
