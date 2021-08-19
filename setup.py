@@ -9,11 +9,27 @@ from subprocess import run, PIPE
 import yaml
 
 
-# -- pip install things -- #
-def pip_install(package):
-    cmd = 'pip3 install ' + package
-    subprocess.run(cmd, shell=True)
+def run_cmd(cmd):
+  return run(
+    cmd, 
+    shell=True, 
+    stdout=PIPE, 
+    stderr=PIPE, 
+    check=True).stdout.decode('utf-8')
 
+
+# -- pip install things -- #
+ # check if pip is installed
+cmd = 'which pip'
+res = run_cmd(cmd)
+if res == '':
+  cmd = 'apt-get install python3-pip'
+  res = run_cmd(cmd)
+  import pip
+
+def pip_install(package):
+    pip.main(['install', package])
+    
 try: 
   from termcolor import colored
 except ImportError:
@@ -69,13 +85,7 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 #github_email = input()
 
 
-def run_cmd(cmd):
-  return run(
-    cmd, 
-    shell=True, 
-    stdout=PIPE, 
-    stderr=PIPE, 
-    check=True).stdout.decode('utf-8')
+
 
 
 # -- Install zsh -- #
