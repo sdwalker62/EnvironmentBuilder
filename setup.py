@@ -116,16 +116,16 @@ except CalledProcessError:
   pass
 
 # Install FiraCode NerdFont
-_ = run_cmd('cd firacode_nf')
+run('cd firacode_nf')
 url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip"
 cmd = 'wget ' + url
 run(cmd)
-_ = run_cmd('unzip FiraCode.zip')
-_ = run_cmd('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Code\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-_ = run_cmd('cp Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('unzip FiraCode.zip')
+run('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Code\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 
 
 # Install FiraMono NerdFont
