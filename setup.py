@@ -111,7 +111,7 @@ _ = run_cmd('mkdir firamono_nf')
 _ = run_cmd('mkdir firacode')
 
 # Install FiraCode NerdFont
-_ = run_cmd('cd ../firacode_nf')
+_ = run_cmd('cd firacode_nf')
 url = """
 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 """
