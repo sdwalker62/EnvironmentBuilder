@@ -109,33 +109,33 @@ print_header('Installing fonts', 1, 'blue')
 check_and_install_pkg('wget')
 run('mkdir firacode_nf')
 run('mkdir firamono_nf')
-run('mkdir firacode')
 run('mkdir ~/.local/share/fonts/')
 
 # Install FiraCode NerdFont
-run('cd firacode_nf')
 url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip"
 cmd = 'wget ' + url
 run(cmd)
-run('unzip FiraCode.zip')
-run('cp Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Code\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-
+run('unzip FiraCode.zip -d firacode_nf')
+run('cp firacode_nf/Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firacode_nf/Fira\ Code\ Light\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firacode_nf/Fira\ Code\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firacode_nf/Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firacode_nf/Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 
 # Install FiraMono NerdFont
-run('cd ../firamono_nf')
 url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip"
 cmd = 'wget ' + url
-run(cmd, shell=True)
-run('unzip FiraMono.zip')
-run('cp Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Mono\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
-run('cp Fira\ Mono\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run(cmd)
+run('unzip FiraMono.zip -d firamono_nf')
+run('cp firamono_nf/Fira\ Mono\ Bold\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firamono_nf/Fira\ Mono\ Medium\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
+run('cp firamono_nf/Fira\ Mono\ Regular\ Nerd\ Font\ Complete.otf ~/.local/share/fonts')
 
-run('cd ..')
+# Clean up
+run('rm FiraCode.zip')
+run('rm FiraMono.zip')
+run('rm -r firacode_nf')
+run('rm -r firacode_nf')
 
 
 # -- Install zsh -- #
