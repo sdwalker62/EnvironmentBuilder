@@ -1,7 +1,7 @@
 # -- Imports -- #
 import os 
 import sys
-import subprocess
+from subprocess import run, PIPE
 
 version = 1.0
 
@@ -58,8 +58,8 @@ print('Your GitHub email is required for setting up ssh properly. Enter the emai
 print_header('Installing zsh', 1)
 
 print('Gathering prerequisites ...')
-cmd = 'apt-get list --installed | grep aeadsadccc'
-shell_out = subprocess.run(cmd, stdout=subprocess.PIPE, shell=True).stdout.decode('utf-8')
-print(shell_out)
+cmd = 'apt-cache policy curl'
+res = run(cmd, shell=True, stdout=PIPE, stderr=PIPE, check=True)
+print(res.returncode, res.stdout, res.stderr)
 
 
