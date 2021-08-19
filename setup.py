@@ -21,15 +21,15 @@ def run_cmd(cmd):
 # -- pip install things -- #
  # check if pip is installed
 cmd = 'which pip'
-res = run_cmd(cmd)
-if res == '':
+res = run(cmd, check=True)
+if res.returncode != 0:
   cmd = 'apt-get install python3-pip'
   res = run_cmd(cmd)
   import pip
 
 def pip_install(package):
     pip.main(['install', package])
-    
+
 try: 
   from termcolor import colored
 except ImportError:
