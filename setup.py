@@ -50,8 +50,7 @@ title = """
   _   _ _             _          ___      _               ___         _      _   
  | | | | |__ _  _ _ _| |_ _  _  / __| ___| |_ _  _ _ __  / __| __ _ _(_)_ __| |_ 
  | |_| | '_ \ || | ' \  _| || | \__ \/ -_)  _| || | '_ \ \__ \/ _| '_| | '_ \  _|
-  \___/|_.__/\_,_|_||_\__|\_,_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|
-                                                  |_|                  |_|                                        |_|                  |_|             
+  \___/|_.__/\_,_|_||_\__|\_,_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|                                  
 """
 
 intro_text = """
@@ -160,7 +159,7 @@ run('cp .zshrc ' + home)
 # -- Install oh-my-zsh -- #
 print_header('Installing oh-my-zsh', 3, 'green')
 check_and_install_pkg('curl')
-install_cmd = "sh -c $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+install_cmd = "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')\""
 run(install_cmd)
 
 
