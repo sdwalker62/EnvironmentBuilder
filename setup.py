@@ -269,3 +269,8 @@ run("sudo apt -y install kde-standard")
 print_header('Install Discord', 11, 'green')
 run("wget https://discordapp.com/api/download?platform=linux&format=deb")
 run("sudo apt -y install ./discord-0.0.15.deb")
+
+
+# -- Install latte-dock -- #
+print_header('Install Latte Dock', 12, 'green')
+run("sudo apt-get -y install latte-dock")
