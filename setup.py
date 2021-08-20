@@ -155,8 +155,6 @@ run(install_cmd)
 
 # -- Install powerlevel10k -- #
 print_header('Installing powerlevel10k', 4, 'green')
-install_cmd = """
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-"""
+install_cmd = "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-" + home + "/.oh-my-zsh/custom}/themes/powerlevel10k"
 run(install_cmd)
 run('cp .p10k.zsh ' + home)
