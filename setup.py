@@ -8,16 +8,7 @@ import sys
 from subprocess import CalledProcessError, PIPE
 import functools
 
-print("Who are you??")
-user = input()
-
-print("Please repeat that!")
-user2 = input()
-if user != user2:
-  print("Values do not match!")
-  sys.exit()
-home = '/home/' + user
-
+run = functools.partial(subprocess.run, shell=True)
 
 def run_cmd(cmd):
   return subprocess.run(
@@ -26,6 +17,17 @@ def run_cmd(cmd):
     stdout=PIPE, 
     stderr=PIPE, 
     check=True).stdout.decode('utf-8')
+
+def get_user_input(msg):
+  while True:
+    try:
+      ret = input(msg)
+    except ValueError:
+      print("\nSorry, I didn't understand that!\n")
+      continue
+    else:
+      break
+  return ret
 
 
 # -- pip install things -- #
@@ -52,6 +54,21 @@ def print_header(msg, index, color):
   print('\n')
   print(colored(str(index) + '. ' + msg, color, attrs=['bold']))
   print('\n')
+
+
+  # Get username
+while True:
+  user = get_user_input("What is your username?\n")
+  user2 = get_user_input("Please repeat that!\n")
+  if user != user2:
+    print(colored("\nValues do not match!\n", 'red', attrs=['bold']))    
+    continue
+  else:
+    print(colored("\nSetting your username to " + user, 'blue'))
+    break
+  
+home = '/home/' + user
+
 
 # -- Introduction -- #
 title = """
@@ -91,15 +108,15 @@ if os.geteuid() != 0:
 
 
 # -- Gather necessary user information for Github ssh keys -- #
-print('Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:')
-github_email = input()
-print("Please repeat that!")
-github_email2 = input()
-if github_email != github_email2:
-  print("Values do not match!")
-  sys.exit()
-
-run = functools.partial(subprocess.run, shell=True)
+while True:
+  github_email = get_user_input("'Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:'\n")
+  github_email2 = get_user_input("Please repeat that!\n")
+  if github_email != github_email2:
+    print(colored("\nValues do not match!\n", 'red', attrs=['bold']))
+    continue
+  else:
+    print(colored("\nSetting your github email to " + github_email, 'blue'))
+    break
 
 
 def check_for_prereq(prereq):
