@@ -214,7 +214,8 @@ run("sudo chmod +x /usr/local/bin/docker-compose")
 # -- Install Jetbrains Toolbox -- #
 print_header('Installing Jetbrains Toolbox', 6, 'green')
 run("wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz")
-run("tar -C -xf jetbrains-toolbox-1.21.9712.tar.gz")
+run("tar -xf jetbrains-toolbox-1.21.9712.tar.gz")
+run("./jebtrains-toolbox-1.21.9712")
 
 
 # -- Install Google Chrome -- # 
@@ -227,7 +228,7 @@ run("sudo dpkg -i google-chrome-stable_current_amd64.deb")
 print_header('Installing VS Code', 8, 'green')
 run("sudo apt install -y software-properties-common apt-transport-https wget")
 run("wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -")
-run("sudo add-apt-repository \"deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main\"")
+run("echo | sudo add-apt-repository \"deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main\"")
 run("sudo apt -y install code")
 
 
@@ -236,7 +237,7 @@ print_header('Installing Flutter', 9, 'green')
 run("sudo apt-get -y install libglu1-mesa")
 run("wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.2.3-stable.tar.xz")
 run("mkdir " + home + "/dev")
-run("tar xf flutter_linux_2.2.3-stable.tar.xz " + home + "/dev")
+run("sudo tar -xf flutter_linux_2.2.3-stable.tar.xz -C " + home + "/dev")
 run("export PATH=\"$PATH:`pwd`/flutter/bin\"")
 run("flutter doctor")
 
@@ -248,4 +249,4 @@ run("echo | ssh-keygen -t ed25519 -C " + github_email)
 
 # -- Install KDE (Standard) -- #
 print_header('Install KDE(Standard)', 10, 'green')
-run("sudo apt install kde-standard")
+run("sudo apt -y install kde-standard")
