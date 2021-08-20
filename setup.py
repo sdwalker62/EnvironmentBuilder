@@ -172,3 +172,39 @@ run("apt-get -y install zsh-syntax-highlighting zsh-autosuggestions")
 install_cmd = "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-" + home + "/.oh-my-zsh/custom}/themes/powerlevel10k"
 run(install_cmd)
 run('cp .p10k.zsh ' + home)
+
+
+# -- Install Docker -- #
+print_header('Installing Docker', 5, 'green')
+run("apt-get remove docker docker-engine docker.io containerd runc")
+cmd = """
+ sudo apt-get update
+ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+"""
+
+run(cmd)
+run(" curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg")
+
+cmd = """
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+"""
+run(cmd)
+
+cmd = """
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+"""
+run (cmd)
+
+cmd = """
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+"""
+run(cmd)
+run("sudo chmod +x /usr/local/bin/docker-compose")
