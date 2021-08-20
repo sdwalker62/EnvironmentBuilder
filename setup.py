@@ -85,6 +85,7 @@ print(intro_text)
 # -- Gather necessary user information for Github ssh keys -- #
 print('Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:')
 #github_email = input()
+github_email = "dalton_walker@icloud.com"
 
 run = functools.partial(subprocess.run, shell=True)
 
@@ -178,8 +179,8 @@ run('cp .p10k.zsh ' + home)
 print_header('Installing Docker', 5, 'green')
 run("apt-get remove docker docker-engine docker.io containerd runc")
 cmd = """
- sudo apt-get update
- sudo apt-get install \
+ sudo apt-get -y update
+ sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -198,8 +199,8 @@ echo \
 run(cmd)
 
 cmd = """
- sudo apt-get update
- sudo apt-get install docker-ce docker-ce-cli containerd.io
+ sudo apt-get -y update
+ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 """
 run (cmd)
 
@@ -208,3 +209,43 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-
 """
 run(cmd)
 run("sudo chmod +x /usr/local/bin/docker-compose")
+
+
+# -- Install Jetbrains Toolbox -- #
+print_header('Installing Jetbrains Toolbox', 6, 'green')
+run("wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz")
+run("tar -C -xf jetbrains-toolbox-1.21.9712.tar.gz")
+
+
+# -- Install Google Chrome -- # 
+print_header('Installing Google Chrome', 7, 'green')
+run("wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb")
+run("sudo dpkg -i google-chrome-stable_current_amd64.deb")
+
+
+# -- Install VS Code -- #
+print_header('Installing VS Code', 8, 'green')
+run("sudo apt install -y software-properties-common apt-transport-https wget")
+run("wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -")
+run("sudo add-apt-repository \"deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main\"")
+run("sudo apt -y install code")
+
+
+# -- Install Flutter -- #
+print_header('Installing Flutter', 9, 'green')
+run("sudo apt-get -y install libglu1-mesa")
+run("wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.2.3-stable.tar.xz")
+run("mkdir " + home + "/dev")
+run("tar xf flutter_linux_2.2.3-stable.tar.xz " + home + "/dev")
+run("export PATH=\"$PATH:`pwd`/flutter/bin\"")
+run("flutter doctor")
+
+
+# -- Generate SSH Keys for Github -- #
+print_header('Generating SSH Keys For Github', 9, 'green')
+run("echo | ssh-keygen -t ed25519 -C " + github_email)
+
+
+# -- Install KDE (Standard) -- #
+print_header('Install KDE(Standard)', 10, 'green')
+run("sudo apt install kde-standard")
