@@ -144,7 +144,7 @@ run('rm -r firamono_nf')
 # -- Install zsh -- #
 print_header('Installing zsh', 2, 'green')
 check_and_install_pkg('zsh')
-run('cp .zshrc' + home)
+run('cp .zshrc ' + home)
 
 # -- Install oh-my-zsh -- #
 print_header('Installing oh-my-zsh', 3, 'green')
@@ -159,4 +159,4 @@ install_cmd = """
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 """
 run(install_cmd)
-run('cp .p10k.zsh' + home)
+run('cp .p10k.zsh ' + home)
