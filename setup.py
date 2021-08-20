@@ -263,3 +263,9 @@ run("echo | ssh-keygen -t ed25519 -C " + github_email)
 # -- Install KDE (Standard) -- #
 print_header('Install KDE(Standard)', 10, 'green')
 run("sudo apt -y install kde-standard")
+
+
+# -- Install Discord -- #
+print_header('Install Discord', 11, 'green')
+run("wget https://discordapp.com/api/download?platform=linux&format=deb")
+run("sudo apt -y install ./discord-0.0.15.deb")
