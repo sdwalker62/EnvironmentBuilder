@@ -104,11 +104,11 @@ def check_and_install_pkg(pkg):
   pkg_exists = check_for_prereq(pkg)
   if not pkg_exists:
     print('Installing ' + pkg)
-    _ = run_cmd('apt-get install ' + pkg)
+    run('apt-get install ' + pkg)
 
 
 # -- Install fonts -- #
-print_header('Installing fonts', 1, 'blue')
+print_header('Installing fonts', 1, 'green')
 check_and_install_pkg('wget')
 run('mkdir firacode_nf')
 run('mkdir firamono_nf')
@@ -142,23 +142,21 @@ run('rm -r firamono_nf')
 
 
 # -- Install zsh -- #
-print_header('Installing zsh', 2, 'blue')
+print_header('Installing zsh', 2, 'green')
 check_and_install_pkg('zsh')
-run('cp .zshrc ~')
+run('cp .zshrc' + home)
 
 # -- Install oh-my-zsh -- #
-print_header('Installing oh-my-zsh', 3, 'blue')
+print_header('Installing oh-my-zsh', 3, 'green')
 check_and_install_pkg('curl')
-install_cmd = """
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-"""
+install_cmd = "sh -c $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 run(install_cmd)
 
 
 # -- Install powerlevel10k -- #
-print_header('Installing powerlevel10k', 4, 'blue')
+print_header('Installing powerlevel10k', 4, 'green')
 install_cmd = """
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 """
 run(install_cmd)
-run('cp .p10k.zsh ~')
+run('cp .p10k.zsh' + home)
