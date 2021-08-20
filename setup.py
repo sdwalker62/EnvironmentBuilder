@@ -240,6 +240,7 @@ run("wget https://storage.googleapis.com/flutter_infra_release/releases/stable/l
 run("mkdir " + home + "/dev")
 run("sudo tar -xf flutter_linux_2.2.3-stable.tar.xz -C " + home + "/dev")
 run("export PATH=\"$PATH:`pwd`/flutter/bin\"")
+run("sudo chmod -R 777 " + home + "/dev")
 run("flutter doctor")
 
 
