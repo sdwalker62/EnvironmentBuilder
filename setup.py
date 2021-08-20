@@ -104,7 +104,7 @@ def check_and_install_pkg(pkg):
   pkg_exists = check_for_prereq(pkg)
   if not pkg_exists:
     print('Installing ' + pkg)
-    run('apt-get install ' + pkg)
+    run('apt-get -y install ' + pkg)
 
 
 # -- Install fonts -- #
