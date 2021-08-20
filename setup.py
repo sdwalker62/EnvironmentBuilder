@@ -159,6 +159,7 @@ run('cp .zshrc ' + home)
 # -- Install oh-my-zsh -- #
 print_header('Installing oh-my-zsh', 3, 'green')
 check_and_install_pkg('curl')
+run("git clone https://github.com/ohmyzsh/ohmyzsh.git " + home + "/.oh-my-zsh")
 install_cmd = "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')\""
 run(install_cmd)
 
