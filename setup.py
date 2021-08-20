@@ -10,7 +10,14 @@ import functools
 
 print("Who are you??")
 user = input()
+
+print("Please repeat that!")
+user2 = input()
+if user != user2:
+  print("Values do not match!")
+  sys.exit()
 home = '/home/' + user
+
 
 def run_cmd(cmd):
   return subprocess.run(
@@ -86,7 +93,11 @@ if os.geteuid() != 0:
 # -- Gather necessary user information for Github ssh keys -- #
 print('Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:')
 github_email = input()
-
+print("Please repeat that!")
+github_email2 = input()
+if github_email != github_email2:
+  print("Values do not match!")
+  sys.exit()
 
 run = functools.partial(subprocess.run, shell=True)
 
