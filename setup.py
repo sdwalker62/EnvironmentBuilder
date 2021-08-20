@@ -106,6 +106,17 @@ def check_and_install_pkg(pkg):
     print('Installing ' + pkg)
     run('apt-get -y install ' + pkg)
 
+# -- Install pyenv -- #
+cmd = """
+apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+"""
+run(cmd)
+run(" git clone https://github.com/pyenv/pyenv.git " + home + "/.pyenv")
+
+
 
 # -- Install fonts -- #
 print_header('Installing fonts', 1, 'green')
