@@ -8,7 +8,8 @@ import sys
 from subprocess import CalledProcessError, PIPE
 import functools
 
-user = 'dalton'
+print("Who are you??")
+user = input()
 home = '/home/' + user
 
 def run_cmd(cmd):
@@ -77,15 +78,15 @@ print(intro_text)
 
 
 # -- Check for root privileges -- # 
-#if os.geteuid() != 0: 
-#  print(colored('This script requires root privileges to operate properly.', 'red', attrs=['bold'])) 
-#  sys.exit()
+if os.geteuid() != 0: 
+  print(colored('This script requires root privileges to operate properly.', 'red', attrs=['bold'])) 
+  sys.exit()
 
 
 # -- Gather necessary user information for Github ssh keys -- #
 print('Your GitHub email is required for setting up ssh properly. Enter the email you use for your GitHub account:')
-#github_email = input()
-github_email = "dalton_walker@icloud.com"
+github_email = input()
+
 
 run = functools.partial(subprocess.run, shell=True)
 
@@ -215,7 +216,7 @@ run("sudo chmod +x /usr/local/bin/docker-compose")
 print_header('Installing Jetbrains Toolbox', 6, 'green')
 run("wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz")
 run("tar -xf jetbrains-toolbox-1.21.9712.tar.gz")
-run("./jebtrains-toolbox-1.21.9712")
+run("./jebtrains-toolbox-1.21.9712/jetbrains-toolbox")
 
 
 # -- Install Google Chrome -- # 
