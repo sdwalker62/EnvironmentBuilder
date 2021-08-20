@@ -15,7 +15,7 @@ export PATH="$PATH:$HOME/miniconda3/bin"
 # PYENV 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+eval "$(sudo pyenv init -)"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
