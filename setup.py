@@ -154,6 +154,8 @@ run('rm -r firamono_nf')
 # -- Install zsh -- #
 print_header('Installing zsh', 2, 'green')
 check_and_install_pkg('zsh')
+run('mkdir ' + home + '.pyenv/shims')
+run('mkdir ' + home + '.pyenv/versions')
 run('cp .zshrc ' + home)
 
 # -- Install oh-my-zsh -- #
@@ -166,6 +168,7 @@ run("git clone https://github.com/ohmyzsh/ohmyzsh.git " + home + "/.oh-my-zsh")
 
 # -- Install powerlevel10k -- #
 print_header('Installing powerlevel10k', 4, 'green')
+run("apt-get -y install zsh-syntax-highlighting zsh-autosuggestions")
 install_cmd = "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-" + home + "/.oh-my-zsh/custom}/themes/powerlevel10k"
 run(install_cmd)
 run('cp .p10k.zsh ' + home)
