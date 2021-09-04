@@ -82,15 +82,17 @@ intro_text = """
 This script will download and install the following items: \n
 1. zsh \n
 2. oh-my-zsh \n
-3. pyenv \n
+3. pyenv **REMOVED** \n
 4. fonts \n
 5. VS Code \n
 6. Docker \n
 7. Flutter \n
 8. Jetbrains Toolbox \n
 9. Google Chrome \n
-10. kde \n\n
+10. Gnome \n
 11. necessary tools \n
+12. Spotify
+13. Hyper
 
 The script will ask for some basic information to generate the necessary ssh keys for git. 
 After that information is provided it will proceed without user input. 
@@ -143,7 +145,7 @@ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-d
 
 """
 run(cmd)
-run(" git clone https://github.com/pyenv/pyenv.git " + home + "/.pyenv")
+#run(" git clone https://github.com/pyenv/pyenv.git " + home + "/.pyenv")
 
 
 
@@ -184,8 +186,8 @@ run('rm -r firamono_nf')
 # -- Install zsh -- #
 print_header('Installing zsh', 2, 'green')
 check_and_install_pkg('zsh')
-run('mkdir ' + home + '.pyenv/shims')
-run('mkdir ' + home + '.pyenv/versions')
+#run('mkdir ' + home + '.pyenv/shims')
+#run('mkdir ' + home + '.pyenv/versions')
 run('cp .zshrc ' + home)
 
 # -- Install oh-my-zsh -- #
@@ -277,17 +279,30 @@ print_header('Generating SSH Keys For Github', 9, 'green')
 run("echo | ssh-keygen -t ed25519 -C " + github_email)
 
 
-# -- Install KDE (Standard) -- #
-print_header('Install KDE(Standard)', 10, 'green')
-run("sudo apt -y install kde-standard")
+# -- Install Gnome -- #
+print_header('Install Gnome', 10, 'green')
+run("sudo add-apt-repository ppa:shemgp/gnome-40")
+run("sudo apt full-upgrade")
+run("sudo apt install gnome-session adwaita-icon-theme-full fonts-cantarell")
 
 
 # -- Install Discord -- #
 print_header('Install Discord', 11, 'green')
-run("wget https://discordapp.com/api/download?platform=linux&format=deb")
-run("sudo apt -y install ./discord-0.0.15.deb")
+run("wget -O discord-0.0.15.deb https://discordapp.com/api/download?platform=linux&format=deb")
+run("sudo apt install ./discord-0.0.15.deb")
 
 
 # -- Install latte-dock -- #
 print_header('Install Latte Dock', 12, 'green')
 run("sudo apt-get -y install latte-dock")
+
+# -- Install spotify -- #
+print_header('Install Spotify', 13, 'green')
+run("""sudo curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list""")
+run("sudo apt-get update && sudo apt-get install spotify-client")
+
+# -- Install Hyper -- #
+print_header('Install Hyper', 14, 'green')
+run("wget -O hyper.deb https://releases.hyper.is/download/deb")
+run("sudo apt install ./hyper.deb")
