@@ -91,6 +91,9 @@ stages.fonts.exec_stage()
 import stages.docker
 stages.docker.exec_stage()
 
+# -- Stage 4: Google Chrome -- #
+import stages.google_chrome
+stages.google_chrome.exec_stage()
 
 
 
