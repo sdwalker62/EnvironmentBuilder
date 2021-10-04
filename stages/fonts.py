@@ -34,6 +34,8 @@ def exec_stage():
     run('cp firacode_nf/Fira\ Code\ Regular\ Nerd\ Font\ Complete.otf $HOME/.local/share/fonts/')
     run('cp firacode_nf/Fira\ Code\ Retina\ Nerd\ Font\ Complete.otf $HOME/.local/share/fonts/')
 
+    run('sudo fc-cache -fv')
+
     # -- Stage 2: Clean-up -- #
     run('rm -r firacode_nf')
     run('rm -r firamono_nf')

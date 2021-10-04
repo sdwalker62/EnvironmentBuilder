@@ -87,6 +87,10 @@ stages.pyenv.exec_stage()
 import stages.fonts
 stages.fonts.exec_stage()
 
+# -- Stage 3: Docker -- #
+import stages.docker
+stages.docker.exec_stage()
+
 
 
 
