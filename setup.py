@@ -36,6 +36,9 @@ while True:
 
 run('sudo apt-get update')
 run('sudo apt-get upgrade')
+run('mkdir tmp')
+run('mkdir $HOME/Development')
+
 
 
 # ========================================================== #
