@@ -95,6 +95,10 @@ stages.docker.exec_stage()
 import stages.google_chrome
 stages.google_chrome.exec_stage()
 
+# -- Stage 5: VS Code -- #
+import stages.vs_code
+stages.vs_code.exec_stage()
+
 
 
 
