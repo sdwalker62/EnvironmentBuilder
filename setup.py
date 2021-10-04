@@ -1,5 +1,7 @@
-version = 1.0
-
+# version = 1.0
+# ========================================================== #
+#                      Section 0: Setup                      #
+# ========================================================== #
 
 # -- Imports -- #
 import os
@@ -8,106 +10,18 @@ import sys
 from subprocess import CalledProcessError, PIPE
 import functools
 
-run = functools.partial(subprocess.run, shell=True)
-
-def run_cmd(cmd):
-  return subprocess.run(
-    cmd, 
-    shell=True, 
-    stdout=PIPE, 
-    stderr=PIPE, 
-    check=True).stdout.decode('utf-8')
-
-def get_user_input(msg):
-  while True:
-    try:
-      ret = input(msg)
-    except ValueError:
-      print("\nSorry, I didn't understand that!\n")
-      continue
-    else:
-      break
-  return ret
-
-
-# -- pip install things -- #
- # check if pip is installed
-try: 
-  cmd = 'which pip'
-  subprocess.run(cmd, shell=True, check=True)
-except CalledProcessError:
-  cmd = 'apt-get -y install python3-pip'
-  _ = run_cmd(cmd)
-  import pip
-
-def pip_install(package):
-    pip.main(['install', package])
-
-try: 
-  from termcolor import colored
-except ImportError:
-    pip_install('termcolor')
-    from termcolor import colored
-
-
-def print_header(msg, index, color):
-  print('\n')
-  print(colored(str(index) + '. ' + msg, color, attrs=['bold']))
-  print('\n')
-
-
-  # Get username
-while True:
-  user = get_user_input("What is your username?\n")
-  user2 = get_user_input("Please repeat that!\n")
-  if user != user2:
-    print(colored("\nValues do not match!\n", 'red', attrs=['bold']))    
-    continue
-  else:
-    print(colored("\nSetting your username to " + user, 'blue'))
-    break
-  
-home = '/home/' + user
-
-
-# -- Introduction -- #
-title = """
-  _   _ _             _          ___      _               ___         _      _   
- | | | | |__ _  _ _ _| |_ _  _  / __| ___| |_ _  _ _ __  / __| __ _ _(_)_ __| |_ 
- | |_| | '_ \ || | ' \  _| || | \__ \/ -_)  _| || | '_ \ \__ \/ _| '_| | '_ \  _|
-  \___/|_.__/\_,_|_||_\__|\_,_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|                                  
-"""
-
-intro_text = """
-This script will download and install the following items: \n
-1. zsh \n
-2. oh-my-zsh \n
-3. pyenv **REMOVED** \n
-4. fonts \n
-5. VS Code \n
-6. Docker \n
-7. Flutter \n
-8. Jetbrains Toolbox \n
-9. Google Chrome \n
-10. Gnome \n
-11. necessary tools \n
-12. Spotify
-13. Hyper
-
-The script will ask for some basic information to generate the necessary ssh keys for git. 
-After that information is provided it will proceed without user input. 
-
-"""
-print(colored(title, 'green'))
-print(colored('version: ' + str(version), 'blue', attrs=['bold']))
-print(intro_text)
-
+# -- Custom Functions -- #
+from utilities import *
+install_pkg('termcolor')
+from termcolor import colored
 
 # -- Check for root privileges -- # 
 if os.geteuid() != 0: 
-  print(colored('This script requires root privileges to operate properly.', 'red', attrs=['bold'])) 
+  print('This script requires root privileges to operate properly.') 
   sys.exit()
 
+#user = run_and_capture('whoami')
+home = run_and_capture('echo $HOME')
 
 # -- Gather necessary user information for Github ssh keys -- #
 while True:
@@ -120,30 +34,63 @@ while True:
     print(colored("\nSetting your github email to " + github_email, 'blue'))
     break
 
-
-def check_for_prereq(prereq):
-  print('checking for prerequisites \'' + prereq + '\'')
-  res = run_cmd('apt-cache policy ' + prereq)
-  if res.split('Installed:')[1][2:6] == 'none':
-    print(prereq + ' is not installed!')
-    return False
-  else:
-    return True
+run('sudo apt-get update')
+run('sudo apt-get upgrade')
 
 
-def check_and_install_pkg(pkg):
-  pkg_exists = check_for_prereq(pkg)
-  if not pkg_exists:
-    print('Installing ' + pkg)
-    run('apt-get -y install ' + pkg)
+# ========================================================== #
+#                     Section 1: Preamble                    #
+# ========================================================== #
+title = """
+  _   _ _             _          ___      _               ___         _      _   
+ | | | | |__ _  _ _ _| |_ _  _  / __| ___| |_ _  _ _ __  / __| __ _ _(_)_ __| |_ 
+ | |_| | '_ \ || | ' \  _| || | \__ \/ -_)  _| || | '_ \ \__ \/ _| '_| | '_ \  _|
+  \___/|_.__/\_,_|_||_\__|\_,_| |___/\___|\__|\_,_| .__/ |___/\__|_| |_| .__/\__|                                  
+"""
+
+intro_text = """This script will download and install the following items: \n\n
+1. zsh \n
+2. oh-my-zsh \n
+3. pyenv \n
+4. fonts \n
+5. VS Code \n
+6. Docker \n
+7. Flutter \n
+8. Jetbrains Toolbox \n
+9. Google Chrome \n
+10. Gnome \n
+11. necessary tools \n
+12. Spotify \n
+13. Hyper \n\n
+
+The script will ask for some basic information to generate the necessary ssh keys for git. 
+After that information is provided it will proceed without user input."""
+
+print(colored(title, 'green'))
+print(colored('This script requires root privileges to operate properly.', 'red', attrs=['bold'])) 
+print(intro_text)
+
+
+# ========================================================== #
+#                     Section 2: Stages                      #
+# ========================================================== #
+
+# -- Stage 0: zsh -- #
+import stages.zsh
+stages.zsh.exec_stage()
+
+# -- Stage 1: pyenv -- #
+import stages.pyenv
+stages.pyenv.exec_stage()
+
+
+
+
+
+
 
 # -- Install pyenv -- #
-cmd = """
-sudo apt-get update; sudo apt-get -y install make build-essential libssl-dev zlib1g-dev \
-libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
-"""
 run(cmd)
 #run(" git clone https://github.com/pyenv/pyenv.git " + home + "/.pyenv")
 
