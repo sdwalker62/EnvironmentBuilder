@@ -83,7 +83,9 @@ stages.zsh.exec_stage()
 import stages.pyenv
 stages.pyenv.exec_stage()
 
-
+# -- Stage 2: Fonts -- #
+import stages.fonts
+stages.fonts.exec_stage()
 
 
 
