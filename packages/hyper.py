@@ -1,16 +1,17 @@
-#   ___  _                   _ 
-#  |   \(_)___ __ ___ _ _ __| |
-#  | |) | (_-</ _/ _ \ '_/ _` |
-#  |___/|_/__/\__\___/_| \__,_|                                
+ #   _  _                    
+ #  | || |_  _ _ __  ___ _ _ 
+ #  | __ | || | '_ \/ -_) '_|
+ #  |_||_|\_, | .__/\___|_|  
+ #        |__/|_|                                          
                                                                                                             
 from ..utilities import run, print_header                 
 
 
-def exec_stage():
+def install():
 
     # ========================================================== #
     #                      Section 0: Main                       #
     # ========================================================== #
-    print_header('Installing Discord')
-    run('wget https://discord.com/api/download?platform=linux&format=deb -O tmp/discord.deb')
-    run('sudo dpkg -i tmp/discord.deb')
+    print_header('Installing Hyper')
+    run('wget https://releases.hyper.is/download/deb -O tmp/hyper.deb')
+    run('sudo apt-get -y install tmp/hyper.deb')

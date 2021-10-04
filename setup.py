@@ -75,48 +75,48 @@ print(intro_text)
 
 
 # ========================================================== #
-#                     Section 2: Stages                      #
+#                    Section 2: Packages                     #
 # ========================================================== #
 
-# -- Stage 0: zsh -- #
-import stages.zsh
-stages.zsh.exec_stage()
+# -- Package 0: zsh -- #
+import packages.zsh
+packages.zsh.install()
 
-# -- Stage 1: pyenv -- #
-import stages.pyenv
-stages.pyenv.exec_stage()
+# -- Package 1: pyenv -- #
+import packages.pyenv
+packages.pyenv.install()
 
-# -- Stage 2: Fonts -- #
-import stages.fonts
-stages.fonts.exec_stage()
+# -- Package 2: Fonts -- #
+import packages.fonts
+packages.fonts.install()
 
-# -- Stage 3: Docker -- #
-import stages.docker
-stages.docker.exec_stage()
+# -- Package 3: Docker -- #
+import packages.docker
+packages.docker.install()
 
-# -- Stage 4: Google Chrome -- #
-import stages.google_chrome
-stages.google_chrome.exec_stage()
+# -- Package 4: Google Chrome -- #
+import packages.google_chrome
+packages.google_chrome.install()
 
-# -- Stage 5: VS Code -- #
-import stages.vs_code
-stages.vs_code.exec_stage()
+# -- Package 5: VS Code -- #
+import packages.vs_code
+packages.vs_code.install()
 
-# -- Stage 6: Flutter -- #
-import stages.flutter
-stages.flutter.exec_stage()
+# -- Package 6: Flutter -- #
+import packages.flutter
+packages.flutter.install()
 
-# -- Stage 7: Discord -- #
-import stages.discord
-stages.discord.exec_stage()
+# -- Package 7: Discord -- #
+import packages.discord
+packages.discord.install()
 
-# -- Stage 8: Hyper -- #
-import stages.hyper
-stages.hyper.exec_stage()
+# -- Package 8: Hyper -- #
+import packages.hyper
+packages.hyper.install()
 
-# -- Stage 9: Spotify -- #
-import stages.spotify
-stages.spotify.exec_stage()
+# -- Package 9: Spotify -- #
+import packages.spotify
+packages.spotify.install()
 
 
 # TODO:

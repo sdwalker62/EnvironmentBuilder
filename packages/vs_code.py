@@ -6,7 +6,7 @@
 from ..utilities import run, print_header                 
 
 
-def exec_stage():
+def install():
 
     # ========================================================== #
     #              Section 0: Install Prerequisites              #
