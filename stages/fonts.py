@@ -17,14 +17,14 @@ def exec_stage():
     # ========================================================== #
     #                      Section 1: Main                       #
     # ========================================================== #
-    print_header('Installing fonts')
+    print_header('Installing Fonts')
 
     # -- Stage 0: Make Directories -- #
     run('mkdir $HOME/.local/share/fonts')
 
     # -- Stage 1: Install FiraCode NerdFont -- #
     run('wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -P tmp')
-    run('unzip firacode_nf/FiraCode.zip -d tmp')
+    run('unzip tmp/FiraCode.zip -d tmp')
 
     run('cp tmp/Fira\ Code\ Bold\ Nerd\ Font\ Complete.otf $HOME/.local/share/fonts/')
     run('cp tmp/Fira\ Code\ Light\ Nerd\ Font\ Complete.otf $HOME/.local/share/fonts/')

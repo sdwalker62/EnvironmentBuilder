@@ -13,5 +13,5 @@ def exec_stage():
     #                      Section 0: Main                       #
     # ========================================================== #
     print_header('Installing Google Chrome')
-    run("wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb")
-    run("sudo dpkg -i google-chrome-stable_current_amd64.deb")
+    run('wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O tmp/google-chrome.deb')
+    run('sudo dpkg -i tmp/google-chrome.deb')
